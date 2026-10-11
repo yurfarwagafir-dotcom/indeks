@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Eksplorasi Modular - Akidah Akhlak Kelas IX MTsN 3 Kab. Gorontalo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #0F172A;
+            --navy-light: #1E293B;
+            --emerald: #047857;
+            --emerald-light: #D1FAE5;
+            --sage: #6EE7B7;
+            --sage-bg: #ECFDF5;
+            --gold: #D97706;
+            --gold-light: #FEF3C7;
+            --tosca: #0D9488;
+            --tosca-hover: #0F766E;
+            --soft-yellow: #FEF08A;
+            --bg-main: #F8FAFC;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --red-alert: #EF4444;
+            --red-bg: #FEF2F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Cover Screen Styling - Stunning & Immersive Redesign */
+        #cover-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1E293B 0%, #0F172A 50%, #020617 100%);
+            color: var(--white);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            overflow-y: auto;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #cover-screen.hidden-cover {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.85) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(217, 119, 6, 0.6);
+            border-radius: 32px;
+            padding: 48px 36px;
+            max-width: 760px;
+            width: 100%;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(13, 148, 136, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            animation: coverFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes coverFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        .cover-badge {
+            background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid var(--sage);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(4, 120, 87, 0.4);
+        }
+
+        .cover-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.2) 0%, rgba(217, 119, 6, 0.2) 100%);
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 30px rgba(217, 119, 6, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .cover-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.25;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .cover-subtitle {
+            font-size: 17px;
+            color: var(--sage);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            border-radius: 2px;
+            margin: 4px 0 28px 0;
+        }
+
+        .cover-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 14px;
+            width: 100%;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .cover-info-item {
+            background: rgba(15, 23, 42, 0.75);
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .cover-info-item:hover {
+            border-color: var(--gold);
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .cover-info-item strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--tosca) 0%, #047857 100%);
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 800;
+            padding: 16px 36px;
+            border-radius: 50px;
+            border: 2px solid var(--sage);
+            cursor: pointer;
+            box-shadow: 0 12px 25px rgba(13, 148, 136, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 18px 30px rgba(13, 148, 136, 0.7);
+            background: linear-gradient(135deg, #0F766E 0%, #065F46 100%);
+        }
+
+        .btn-cover-dev {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 50px;
+            border: 2px solid rgba(217, 119, 6, 0.6);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-cover-dev:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.4);
+        }
+
+        /* Header & Navigation Styling */
+        header {
+            background-color: var(--navy);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-bottom: 4px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            background-color: var(--emerald);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border: 1px solid var(--gold);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-tags {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .badge-gold {
+            background-color: var(--gold);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .text-sage {
+            color: var(--sage);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .info-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #CBD5E1;
+            background-color: rgba(30, 41, 59, 0.9);
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .marquee-bar {
+            background-color: #020617;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 0;
+            overflow: hidden;
+            border-top: 1px solid #1E293B;
+            border-bottom: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        nav {
+            background-color: #0B132B;
+            border-top: 1px solid #1E293B;
+            padding: 0 16px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 6px;
+            padding: 8px 0;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #94A3B8;
+            background: transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--navy-light);
+            color: var(--white);
+        }
+
+        .tab-btn.active {
+            background-color: var(--tosca);
+            color: var(--white);
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.4);
+        }
+
+        /* Layout & Card Styling */
+        main {
+            max-width: 1200px;
+            margin: 24px auto;
+            padding: 0 16px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .banner-hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .banner-hero h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            margin: 10px 0 8px 0;
+        }
+
+        .banner-hero p {
+            font-size: 14px;
+            color: #CBD5E1;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            max-width: 800px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Elegant Color Buttons for Sub-topics */
+        .materi-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .m-btn {
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            color: #FFF;
+        }
+
+        .m-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            filter: brightness(1.1);
+        }
+
+        .m-btn.active {
+            ring: 3px solid #FFF;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.5), 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        .m-btn-0 { background: linear-gradient(135deg, #047857 0%, #059669 100%); }
+        .m-btn-1 { background: linear-gradient(135deg, #D97706 0%, #B45309 100%); }
+        .m-btn-2 { background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%); }
+        .m-btn-3 { background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%); }
+        .m-btn-4 { background: linear-gradient(135deg, #1E293B 0%, #334155 100%); }
+        .m-btn-5 { background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%); }
+        .m-btn-6 { background: linear-gradient(135deg, #16A34A 0%, #15803D 100%); }
+        .m-btn-7 { background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); }
+        .m-btn-8 { background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%); }
+
+        .materi-header-box {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 20px 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border-left: 6px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .materi-icon {
+            font-size: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .box-info {
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+
+        .box-info-emerald { background-color: var(--sage-bg); border: 1px solid #A7F3D0; }
+        .box-info-amber { background-color: var(--gold-light); border: 1px solid #FDE68A; }
+        .box-info-slate { background-color: #F1F5F9; border: 1px solid #CBD5E1; }
+
+        /* Buttons & Option Elements */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-tosca { background-color: var(--tosca); color: var(--white); }
+        .btn-tosca:hover { background-color: var(--tosca-hover); transform: translateY(-1px); }
+        .btn-gold { background-color: var(--gold); color: #000; }
+        .btn-gold:hover { background-color: #B45309; color: #FFF; transform: translateY(-1px); }
+        .btn-emerald { background-color: var(--emerald); color: var(--white); }
+        .btn-emerald:hover { background-color: #059669; transform: translateY(-1px); }
+        .btn-gray { background-color: #64748B; color: var(--white); }
+        .btn-gray:hover { background-color: #475569; }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--white);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13.5px;
+            color: var(--text-dark);
+        }
+
+        .option-btn:hover {
+            border-color: var(--tosca);
+            background-color: #F0FDFA;
+        }
+
+        .option-btn.selected {
+            border-color: var(--tosca);
+            background-color: #CCFBF1;
+            font-weight: 600;
+        }
+
+        .option-badge {
+            background-color: #E2E8F0;
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 12px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Developer Modal Styling */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-backdrop.active-modal {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--gold);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            position: relative;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(20px) scale(0.95); }
+            to { transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 24px;
+            position: relative;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--red-alert);
+            border-color: var(--red-alert);
+        }
+
+        .developer-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--tosca) 100%);
+            border: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            margin-bottom: 12px;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .profile-badge {
+            background-color: var(--emerald-light);
+            color: #065F46;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* Tujuan Pembelajaran Card/List Styling */
+        .tp-item {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--tosca);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: var(--text-dark);
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .tp-number {
+            background: var(--tosca);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        footer {
+            background-color: var(--navy);
+            color: #94A3B8;
+            padding: 20px 16px;
+            border-top: 1px solid #1E293B;
+            font-size: 12px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; align-items: flex-start; }
+            .banner-hero h2 { font-size: 20px; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER SCREEN -->
+    <div id="cover-screen">
+        <div class="cover-card">
+            <span class="cover-badge">Media Pembelajaran Interaktif (MPI) Modular</span>
+            
+            <div class="cover-icon" style="overflow: hidden; padding: 0;">
+                <img src="pak_yudan.jpg" 
+                     onerror="this.onerror=null; this.parentElement.innerHTML='🕌';" 
+                     alt="Yudan Wagafir, S.Pd.I., Gr" 
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <h1 class="cover-title">AKIDAH AKHLAK KELAS IX</h1>
+            <p class="cover-subtitle">Menghindari Akhlak Tercela (Sifat Riya')</p>
+            <div class="cover-divider"></div>
+
+            <div class="cover-info-grid">
+                <div class="cover-info-item">
+                    <strong>🏫 Satuan Pendidikan</strong>
+                    <span>MTs Negeri 3 Kab. Gorontalo</span>
+                </div>
+                <div class="cover-info-item">
+                    <strong>👨‍🏫 Guru Pengampu</strong>
+                    <span>Yudan Wagafir, S.Pd.I., Gr</span>
+                </div>
+                <div class="cover-info-item">
+                    <strong>📚 Fase & Kelas</strong>
+                    <span>Fase D / Kelas IX</span>
+                </div>
+                <div class="cover-info-item">
+                    <strong>⚡ Moda Akses</strong>
+                    <span>100% Offline Standalone</span>
+                </div>
+            </div>
+
+            <div class="cover-actions">
+                <button onclick="openTPModal()" class="btn-start">
+                    <span>Mulai Pembelajaran</span>
+                    <span style="font-size: 20px;">🚀</span>
+                </button>
+                <button onclick="openDevModal()" class="btn-cover-dev">
+                    <span>Profil Pengembang</span>
+                    <span>🔍</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TUJUAN PEMBELAJARAN (TAMPIL SEBELUM EKSPLORASI) -->
+    <div id="tp-modal" class="modal-backdrop">
+        <div class="modal-card" style="max-width: 620px;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+                <span class="badge-gold">Kurikulum Merdeka • Fase D Kelas IX</span>
+                <h2 style="font-size: 22px; font-weight: 800; color: #FFF; margin-top: 6px;">🎯 Tujuan Pembelajaran (TP)</h2>
+                <p style="font-size: 13px; color: var(--sage); margin-top: 2px;">Akidah Akhlak: Menghindari Akhlak Tercela (Sifat Riya')</p>
+            </div>
+
+            <div class="modal-body">
+                <p style="font-size: 13.5px; color: var(--text-dark); margin-bottom: 16px; line-height: 1.6;">
+                    Setelah mengikuti seluruh rangkaian aktivitas dalam Media Pembelajaran Interaktif ini, peserta didik diharapkan mampu:
+                </p>
+
+                <div class="tp-item">
+                    <span class="tp-number">1</span>
+                    <div>
+                        <strong>Memahami Hakikat Sifat Riya':</strong> Menjelaskan pengertian riya' secara etimologi dan terminologi serta mengidentifikasi dalil naqli yang melarangnya dengan tepat.
+                    </div>
+                </div>
+
+                <div class="tp-item" style="border-left-color: var(--gold);">
+                    <span class="tp-number" style="background: var(--gold); color: #000;">2</span>
+                    <div>
+                        <strong>Menganalisis Bentuk & Ciri Riya':</strong> Mengklasifikasikan bentuk-bentuk riya' (<em>Dzahir & Khafi</em>) serta mengenali ciri-ciri dan penyebab munculnya riya' dalam kehidupan sehari-hari.
+                    </div>
+                </div>
+
+                <div class="tp-item" style="border-left-color: var(--red-alert);">
+                    <span class="tp-number" style="background: var(--red-alert);">3</span>
+                    <div>
+                        <strong>Mengevaluasi Bahaya & Dampak Negatif:</strong> Menganalisis bahaya sifat riya' terhadap keutuhan pahala amal ibadah dan kedamaian jiwa manusia.
+                    </div>
+                </div>
+
+                <div class="tp-item" style="border-left-color: var(--emerald);">
+                    <span class="tp-number" style="background: var(--emerald);">4</span>
+                    <div>
+                        <strong>Menerapkan Sikap Ikhlas Kontekstual:</strong> Menunjukkan strategi menghindari riya' dan menampilkan perilaku ikhlas dalam kehidupan masyarakat Gorontalo & madrasah.
+                    </div>
+                </div>
+
+                <div style="background: #ECFDF5; border: 1px dashed var(--emerald); border-radius: 12px; padding: 12px 16px; margin-top: 16px; font-size: 12.5px; color: #065F46; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 22px;">💡</span>
+                    <span><strong>Petunjuk Belajar:</strong> Bacalah setiap sub-materi secara runtut, lakukan simulasi kasus, dan kerjakan kuis evaluasi di akhir pembelajaran.</span>
+                </div>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <button onclick="confirmStartLearning()" class="btn-start" style="padding: 14px 32px; font-size: 15px;">
+                        <span>Saya Siap Belajar! Eksplorasi Sekarang</span>
+                        <span>➡️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER & TEKS BERJALAN -->
+    <header>
+        <div class="header-top">
+            <div class="brand-container">
+                <div class="brand-logo">🕌</div>
+                <div class="brand-title">
+                    <div class="brand-tags">
+                        <span class="badge-gold">Kemenag Gorontalo</span>
+                        <span class="text-sage">Fase D / Kelas IX</span>
+                    </div>
+                    <h1 class="brand-name">MTs Negeri 3 Kab. Gorontalo</h1>
+                </div>
+            </div>
+            
+            <div class="info-pill">
+                <span>📚 <strong>Mapel:</strong> Akidah Akhlak</span>
+                <span>•</span>
+                <span>👨‍🏫 <strong>Guru:</strong> Yudan Wagafir, S.Pd.I., Gr</span>
+            </div>
+        </div>
+
+        <div class="marquee-bar">
+            <div class="marquee-content">
+                ✨ Selamat Datang di Pembelajaran Akidah Akhlak MTs Negeri 3 Kabupaten Gorontalo ✨ &nbsp;&nbsp;&nbsp;&nbsp;
+                🕌 Mari Menghindari Akhlak Tercela (Sifat Riya') 🕌 &nbsp;&nbsp;&nbsp;&nbsp;
+                ✨ Selamat Datang di Pembelajaran Akidah Akhlak MTs Negeri 3 Kabupaten Gorontalo ✨
+            </div>
+        </div>
+
+        <nav>
+            <div class="nav-container">
+                <button onclick="switchTab('beranda')" id="btn-beranda" class="tab-btn active">🏠 Beranda</button>
+                <button onclick="switchTab('materi')" id="btn-materi" class="tab-btn">📖 Materi & Eksplorasi</button>
+                <button onclick="switchTab('simulator')" id="btn-simulator" class="tab-btn">⚖️ Simulasi Kasus Kontekstual</button>
+                <button onclick="switchTab('kuis')" id="btn-kuis" class="tab-btn">✍️ Kuis Formatif (10 Soal)</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- BERANDA TAB -->
+        <section id="beranda" class="tab-content active">
+            <div class="banner-hero">
+                <span class="badge-gold" style="background: var(--emerald); color: #FFF;">Media Pembelajaran Interaktif (MPI) Modular</span>
+                <h2>Menghindari Akhlak Tercela (Sifat Riya')</h2>
+                <p>
+                    Selamat datang di modul pembelajaran digital interaktif khusus peserta didik MTs Negeri 3 Kabupaten Gorontalo. Media ini dirancang untuk mendalami pencegahan sifat mazmumah (Riya') dengan pendekatan kontekstual pesisir & agraris Gorontalo.
+                </p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="switchTab('materi')" class="btn btn-tosca">Mulai Eksplorasi Materi ➡️</button>
+                    <button onclick="switchTab('kuis')" class="btn btn-gold">Uji Pemahaman (Kuis) 📝</button>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div style="font-size: 28px; margin-bottom: 8px;">📍</div>
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">Kondisi Geografis & Kontekstual</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+                        MTsN 3 Kab. Gorontalo berada di dataran relatif datar dengan aksesibilitas tinggi ke wilayah pesisir dan agraris. Pembelajaran ini mengaitkan akhlak tercela dengan realitas sosial masyarakat sekitar (contoh: gotong royong vs riya').
+                    </p>
+                    <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 11px; font-weight: 700; color: var(--emerald);">
+                        🌐 Mode Offline 100% (Tanpa Kebutuhan Internet)
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="font-size: 28px; margin-bottom: 8px;">⚡</div>
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">Profil & Karakter Murid</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+                        Dirancang khusus untuk siswa kelas IX yang aktif kinestetik, menyukai visual menarik, dan antusias dengan kompetisi kelompok maupun simulasi interaktif yang aplikatif dalam kehidupan sehari-hari di madrasah.
+                    </p>
+                    <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 11px; font-weight: 700; color: var(--tosca);">
+                        🎯 Capaian Fase D Kurikulum Merdeka
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATERI TAB -->
+        <section id="materi" class="tab-content">
+            <div class="card">
+                <div style="margin-bottom: 16px;">
+                    <h2 style="font-size: 20px; font-weight: 700; color: var(--navy);">Modul Eksplorasi Akhlak Tercela (Sifat Riya')</h2>
+                    <p style="font-size: 13px; color: var(--text-muted);">Pilih salah satu tombol sub-topik di bawah ini untuk mempelajari bagian materi secara rinci dan terpisah:</p>
+                </div>
+
+                <!-- Tombol Navigasi Terpisah Per Sub-Fitur Materi dengan Warna Elegan -->
+                <div class="materi-nav">
+                    <button onclick="selectMateri(0)" class="m-btn m-btn-0 active">📘 1. Pengertian Dasar</button>
+                    <button onclick="selectMateri(1)" class="m-btn m-btn-1">📜 2. Dalil Naqli</button>
+                    <button onclick="selectMateri(2)" class="m-btn m-btn-2">📌 3. Bentuk-Bentuk Riya'</button>
+                    <button onclick="selectMateri(3)" class="m-btn m-btn-3">⚠️ 4. Penyebab Sifat Riya'</button>
+                    <button onclick="selectMateri(4)" class="m-btn m-btn-4">🔍 5. Ciri-Ciri Orang Riya'</button>
+                    <button onclick="selectMateri(5)" class="m-btn m-btn-5">💥 6. Bahaya & Dampak</button>
+                    <button onclick="selectMateri(6)" class="m-btn m-btn-6">💡 7. Cara Menghindari</button>
+                    <button onclick="selectMateri(7)" class="m-btn m-btn-7">🌴 8. Contoh Kontekstual Gorontalo</button>
+                    <button onclick="selectMateri(8)" class="m-btn m-btn-8">🌟 9. Hikmah Menjauhi Riya'</button>
+                </div>
+
+                <div id="materi-display-box">
+                    <!-- Dynamic Content Injected Here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATOR TAB -->
+        <section id="simulator" class="tab-content">
+            <div class="card">
+                <div style="margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                    <span class="badge-gold" style="background: var(--soft-yellow); color: #000;">Interaktif Real-Time</span>
+                    <h2 style="font-size: 20px; font-weight: 700; color: var(--navy); margin-top: 6px;">Simulasi Kasus Kontekstual Madrasah & Lingkungan</h2>
+                    <p style="font-size: 13px; color: var(--text-muted);">Analisis studi kasus nyata di lingkungan sekitar Gorontalo, tentukan sikap yang benar berdasarkan Akidah Akhlak, dan dapatkan umpan balik edukatif seketika.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h4 style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">Pilih Skenario Kasus:</h4>
+                        <div id="case-list" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <div class="box-info box-info-slate">
+                        <div id="case-content-area">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KUIS TAB -->
+        <section id="kuis" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                    <div>
+                        <span class="badge-gold" style="background: var(--emerald); color: #FFF;">Evaluasi Mandiri</span>
+                        <h2 style="font-size: 20px; font-weight: 700; color: var(--navy); margin-top: 6px;">Kuis Formatif Akidah Akhlak (10 Butir Soal)</h2>
+                        <p style="font-size: 13px; color: var(--text-muted);">Uji pemahaman Anda mengenai materi akhlak tercela (Sifat Riya'). Setiap jawaban disertai pembahasan lengkap.</p>
+                    </div>
+                    <div id="quiz-score-badge" style="display: none; background: var(--gold-light); border: 1px solid var(--gold); padding: 10px 16px; border-radius: 12px; text-align: center;">
+                        <span style="font-size: 11px; font-weight: 700; color: #78350F; display: block;">Skor Akhir Anda</span>
+                        <span id="final-score-val" style="font-size: 22px; font-weight: 900; color: #000;">0 / 100</span>
+                    </div>
+                </div>
+
+                <div id="quiz-container">
+                    <!-- Injected by JS -->
+                </div>
+
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <button id="prev-quiz-btn" onclick="prevQuizQuestion()" class="btn btn-gray" style="display: none;">⬅️ Sebelumnya</button>
+                    <div id="quiz-progress-text" style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Soal 1 dari 10</div>
+                    <button id="next-quiz-btn" onclick="nextQuizQuestion()" class="btn btn-tosca">Selanjutnya ➡️</button>
+                    <button id="submit-quiz-btn" onclick="submitQuiz()" class="btn btn-emerald" style="display: none;">Selesaikan & Lihat Hasil 🎯</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div>
+                <p style="color: #FFF; font-weight: 600;">MTs Negeri 3 Kab. Gorontalo • Kementerian Agama Republik Indonesia</p>
+                <p style="margin-top: 4px;">Pengampu & Pengembang: Yudan Wagafir, S.Pd.I., Gr | Media Pembelajaran Eksplorasi Modular</p>
+            </div>
+            <div style="text-align: right;">
+                <p style="color: var(--sage); font-weight: 600;">100% Offline Standalone CSS & JS (Tanpa Internet)</p>
+                <p style="margin-top: 4px; color: #64748B;">© 2026 Kanwil Kemenag Prov. Gorontalo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL PROFIL PENGEMBANG -->
+    <div id="developer-modal" class="modal-backdrop" onclick="closeDevModalOnBackdrop(event)">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="modal-close-btn" onclick="closeDevModal()">✕</button>
+
+                <div class="developer-avatar" style="overflow: hidden; padding: 0;">
+                    <img src="pak_yudan.jpg" 
+                         onerror="this.onerror=null; this.parentElement.innerHTML='🕌';" 
+                         alt="Yudan Wagafir, S.Pd.I., Gr" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+
+                <span class="badge-gold">Profil Pengembang & Guru Pengampu</span>
+                <h2 style="font-size: 22px; font-weight: 800; color: #FFF; margin-top: 6px;">Yudan Wagafir, S.Pd.I., Gr</h2>
+                <p style="font-size: 13px; color: var(--sage); margin-top: 2px;">Guru Mata Pelajaran Akidah Akhlak • MTsN 3 Kab. Gorontalo</p>
+            </div>
+
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;">
+                    <span class="profile-badge">🏫 Satuan & Wilayah Kerja</span>
+                    <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; font-size: 13px;">
+                        <p style="margin-bottom: 6px;"><strong>Instansi:</strong> MTs Negeri 3 Kabupaten Gorontalo</p>
+                        <p style="margin-bottom: 6px;"><strong>Wilayah Kerja:</strong> Kantor Wilayah Kementerian Agama Provinsi Gorontalo</p>
+                        <p style="margin-bottom: 6px;"><strong>Bidang Keahlian:</strong> Pendidikan Agama Islam, Akidah Akhlak & Instructional Design Pembelajaran Digital Modular</p>
+                        <p><strong>Kualifikasi:</strong> Sarjana Pendidikan Islam (S.Pd.I) & Bersertifikat Pendidik Profesional (Gr)</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span class="profile-badge" style="background: var(--gold-light); color: #78350F;">🎯 Visi Instructional Design</span>
+                    <div style="background: #FEFCE8; border: 1px solid #FDE68A; border-radius: 12px; padding: 14px; font-size: 13px; color: #78350F; line-height: 1.6;">
+                        "Menghadirkan inovasi media pembelajaran digital berbasis Kurikulum Merdeka yang ramah infrastruktur lokal, dapat diakses 100% offline tanpa hambatan jaringan, serta mengintegrasikan nilai-nilai kearifan lokal Gorontalo dalam penanaman akidah dan akhlak karimah bagi generasi muda madrasah."
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span class="profile-badge" style="background: var(--sage-bg); color: #065F46;">⚙️ Spesifikasi Arsitektur Media (MPI)</span>
+                    <div class="grid-2" style="gap: 10px;">
+                        <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; font-size: 12px;">
+                            <strong>🖥️ Moda Akses:</strong>
+                            <p style="color: var(--text-muted); margin-top: 4px;">Standalone Single-File HTML5, CSS3, & Pure JavaScript (100% Offline Tanpa CDN / Internet)</p>
+                        </div>
+                        <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; font-size: 12px;">
+                            <strong>🎨 Palette Warna Syar'i:</strong>
+                            <p style="color: var(--text-muted); margin-top: 4px;">Navy, Emerald Green, Gold, Sage Green, & Tosca untuk kejelasan visual dan kenyamanan membaca</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                    <button onclick="closeDevModal()" class="btn btn-tosca" style="padding: 10px 28px;">
+                        Tutup Profil ✖
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDevModal() {
+            const modal = document.getElementById('developer-modal');
+            if (modal) {
+                modal.classList.add('active-modal');
+            }
+        }
+
+        function closeDevModal() {
+            const modal = document.getElementById('developer-modal');
+            if (modal) {
+                modal.classList.remove('active-modal');
+            }
+        }
+
+        function closeDevModalOnBackdrop(event) {
+            if (event.target.id === 'developer-modal') {
+                closeDevModal();
+            }
+        }
+
+        function openTPModal() {
+            const modal = document.getElementById('tp-modal');
+            if (modal) {
+                modal.classList.add('active-modal');
+            }
+        }
+
+        function confirmStartLearning() {
+            const tpModal = document.getElementById('tp-modal');
+            if (tpModal) {
+                tpModal.classList.remove('active-modal');
+            }
+            closeCover();
+        }
+
+        function closeCover() {
+            const cover = document.getElementById('cover-screen');
+            if (cover) {
+                cover.classList.add('hidden-cover');
+            }
+        }
+
+        // DATA SUB-FITUR MATERI TERPISAH (Sifat Riya')
+        const materiSubData = [
+            {
+                id: 0,
+                title: "1. Pengertian Dasar Sifat Riya' (Etimologi & Terminologi)",
+                icon: "📘",
+                badgeColor: "var(--emerald)",
+                cardClass: "box-info-emerald",
+                content: `
+                    <div style="line-height: 1.7; font-size: 14px;">
+                        <p style="margin-bottom: 12px;"><strong>Secara Bahasa (Etimologi):</strong> Kata <em>Riya'</em> (الرياء) berasal dari kata dasar <em>Ra'a</em> (رَأَى) yang berarti melihat, menampakkan, atau memperlihatkan.</p>
+                        <p style="margin-bottom: 12px;"><strong>Secara Istilah (Terminologi):</strong> Riya' adalah sikap atau perbuatan seseorang yang memperlihatkan suatu amal ibadah atau kebajikan kepada orang lain, bukan semata-mata mengharapkan keridhaan Allah SWT, melainkan demi mendapatkan pujian, sanjungan, kedudukan, atau pengakuan di mata manusia.</p>
+                        <div style="background: rgba(4, 120, 87, 0.08); padding: 12px; border-radius: 8px; border-left: 4px solid var(--emerald); font-size: 13px; color: #065F46;">
+                            💡 <strong>Inti Pemahaman:</strong> Keikhlasan niat hanya ditujukan kepada Allah SWT (Lillahi Ta'ala). Riya' memalingkan niat luhur tersebut menjadi keinginan dipuji manusia.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 1,
+                title: "2. Dalil Naqli tentang Sifat Riya'",
+                icon: "📜",
+                badgeColor: "var(--gold)",
+                cardClass: "box-info-amber",
+                content: `
+                    <div style="line-height: 1.7; font-size: 14px;">
+                        <p style="font-weight: 700; margin-bottom: 8px;">Firman Allah SWT dalam QS. Al-Baqarah: 264</p>
+                        <blockquote style="font-style: italic; background: #FFF; padding: 14px; border-radius: 8px; border: 1px solid #FDE68A; margin-bottom: 12px; color: #78350F;">
+                            "Wahai orang-orang yang beriman! Janganlah kamu merusak sedekahmu dengan menyebut-nyebutnya dan menyakiti (perasaan penerima), seperti orang yang menginfakkan hartanya karena riya' kepada manusia dan tidak beriman kepada Allah dan hari akhir..."
+                        </blockquote>
+                        <p style="font-size: 13px; color: #78350F;">
+                            <strong>Hadits Rasulullah SAW:</strong> <em>"Sesungguhnya yang paling aku takutkan atas kamu adalah syirik kecil."</em> Para sahabat bertanya: <em>"Apakah syirik kecil itu wahai Rasulullah?"</em> Beliau menjawab: <em>"Riya'."</em> (HR. Ahmad).
+                        </p>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "3. Bentuk-Bentuk Sifat Riya'",
+                icon: "📌",
+                badgeColor: "var(--navy)",
+                cardClass: "box-info-slate",
+                content: `
+                    <div style="line-height: 1.7; font-size: 13.5px;">
+                        <div style="margin-bottom: 14px; background: #FFF; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--navy); font-weight: 700; font-size: 14px; margin-bottom: 4px;">1. Riya' Dzahir (Jelas / Nyata)</h5>
+                            <p style="color: var(--text-muted);">Beramal kebajikan dengan sengaja agar dilihat orang lain secara langsung di hadapan manusia. Contohnya memperbagus dan memperlama gerakan shalat saat ada ustadz/guru yang memperhatikan.</p>
+                        </div>
+                        <div style="background: #FFF; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--navy); font-weight: 700; font-size: 14px; margin-bottom: 4px;">2. Riya' Khafi (Terselubung / Halus)</h5>
+                            <p style="color: var(--text-muted);">Mengharapkan pujian secara tidak langsung di dalam hati, atau merasa sangat bangga dan senang apabila orang lain secara tidak sengaja mengetahui amal kebajikan rahasianya.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "4. Penyebab Sifat Riya'",
+                icon: "⚠️",
+                badgeColor: "var(--gold)",
+                cardClass: "box-info-amber",
+                content: `
+                    <ul style="padding-left: 18px; line-height: 1.8; font-size: 13.5px; color: #78350F;">
+                        <li><strong>Lemahnya Tauhid & Keimanan:</strong> Kurangnya pemahaman akan keagungan Allah SWT sehingga lebih mengagungkan penilaian manusia.</li>
+                        <li><strong>Cinta Terhadap Pujian (Hubbud Dunya):</strong> Keinginan kuat untuk selalu disanjung, diakui, dan memiliki kedudukan tinggi di tengah masyarakat.</li>
+                        <li><strong>Takut Celaan Manusia:</strong> Merasa cemas dan takut dianggap kikir, kurang taat, atau rendah di mata teman atau pimpinan.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 4,
+                title: "5. Ciri-Ciri Orang yang Memiliki Sifat Riya'",
+                icon: "🔍",
+                badgeColor: "var(--navy)",
+                cardClass: "box-info-slate",
+                content: `
+                    <ul style="padding-left: 18px; line-height: 1.8; font-size: 13.5px; color: var(--text-dark);">
+                        <li><strong>Sangat Rajin saat Dilihat Orang:</strong> Sangat giat dan penuh semangat beribadah atau beramal ketika ada orang lain yang menyaksikan.</li>
+                        <li><strong>Malas saat Sendirian:</strong> Menjadi lesu, enggan, dan tidak bergairah melakukan ibadah saat dalam keadaan sepi sendirian.</li>
+                        <li><strong>Gantungkan Semangat pada Pujian:</strong> Semangat beramalnya meningkat pesat jika dipuji, dan sebaliknya langsung berkurang atau terhenti total jika dicela atau diabaikan.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 5,
+                title: "6. Bahaya & Dampak Negatif Sifat Riya'",
+                icon: "💥",
+                badgeColor: "var(--red-alert)",
+                cardClass: "box-info-slate",
+                content: `
+                    <ul style="padding-left: 18px; line-height: 1.8; font-size: 13.5px; color: var(--red-alert);">
+                        <li><strong>Menghapus Pahala Amal:</strong> Seluruh pahala kebaikan yang telah dikerjakan menjadi gugur dan sia-sia di sisi Allah SWT.</li>
+                        <li><strong>Termasuk Dosa Besar:</strong> Dikategorikan sebagai syirik kecil (Syirik Asghar) yang merusak kemurnian niat tauhid.</li>
+                        <li><strong>Memicu Ketidaktenangan Jiwa:</strong> Hati selalu merasa gelisah, haus akan pengakuan, dan mudah kecewa jika sanjungan tak kunjung didapatkan.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 6,
+                title: "7. Cara Menghindari Sifat Riya'",
+                icon: "💡",
+                badgeColor: "var(--emerald)",
+                cardClass: "box-info-emerald",
+                content: `
+                    <ul style="padding-left: 18px; line-height: 1.8; font-size: 13.5px; color: #065F46;">
+                        <li><strong>Menata Niat Ikhlas:</strong> Selalu meluruskan niat semata-mata mengharapkan keridhaan Allah SWT sebelum dan saat beramal.</li>
+                        <li><strong>Menyembunyikan Amalan Sunnah:</strong> Membiasakan diri melakukan sedekah, shalat malam, atau kebaikan lain secara diam-diam tanpa publikasi.</li>
+                        <li><strong>Memperbanyak Doa & Muhasabah:</strong> Berdoa agar dilindungi dari sifat pamer dan rajin mengevaluasi niat dalam hati secara berkala.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 7,
+                title: "8. Contoh Kontekstual Riya' di Kehidupan (Gorontalo/Madrasah)",
+                icon: "🌴",
+                badgeColor: "var(--gold)",
+                cardClass: "box-info-amber",
+                content: `
+                    <div style="line-height: 1.7; font-size: 13.5px; color: #78350F;">
+                        <p style="margin-bottom: 10px;"><strong>Skenario Kontekstual:</strong></p>
+                        <p style="background: #FFF; padding: 12px; border-radius: 8px; border: 1px solid #FDE68A;">
+                            Seorang siswa MTsN 3 Kab. Gorontalo ikut bergotong royong membantu warga pesisir membersihkan musala atau menyumbangkan bantuan beras. Namun, ia sengaja meminta rekannya memotret tindakannya berulang kali lalu mengunggahnya ke media sosial hanya demi mendapatkan pujian "anak shaleh" dari teman-teman sekelasnya.
+                        </p>
+                    </div>
+                `
+            },
+            {
+                id: 8,
+                title: "9. Hikmah Menjauhi Sifat Riya'",
+                icon: "🌟",
+                badgeColor: "var(--emerald)",
+                cardClass: "box-info-emerald",
+                content: `
+                    <ul style="padding-left: 18px; line-height: 1.8; font-size: 13.5px; color: #065F46;">
+                        <li><strong>Ketenangan Jiwa Sejati:</strong> Bebas dari beban mental mencari pengakuan dan sanjungan manusia.</li>
+                        <li><strong>Pahala Utuh & Berkah:</strong> Amal ibadah diterima dan mendapatkan pahala yang sempurna serta keridhaan di sisi Allah SWT.</li>
+                        <li><strong>Pribadi yang Jujur & Istiqamah:</strong> Membentuk karakter yang konsisten berbuat baik kapan pun dan di mana pun, ada maupun tidak ada manusia yang melihat.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        function selectMateri(index) {
+            const buttons = document.querySelectorAll('.m-btn');
+            buttons.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === index);
+            });
+
+            const data = materiSubData[index];
+            const container = document.getElementById('materi-display-box');
+
+            container.innerHTML = `
+                <div class="materi-header-box">
+                    <div class="materi-icon">${data.icon}</div>
+                    <div>
+                        <span style="font-size: 11px; text-transform: uppercase; color: var(--sage); font-weight: 700;">Sub-Materi Akidah Akhlak</span>
+                        <h3 style="font-size: 20px; font-weight: 700; color: #FFF; margin-top: 4px;">${data.title}</h3>
+                    </div>
+                </div>
+
+                <div class="box-info ${data.cardClass}" style="border-left: 5px solid ${data.badgeColor};">
+                    ${data.content}
+                </div>
+            `;
+        }
+
+        // SIMULATOR CASES DATA
+        const casesData = [
+            {
+                id: 1,
+                title: "Kasus 1: Sedekah & Media Sosial (Riya')",
+                situation: "Ahmad membantu menyumbangkan beras untuk pembangunan musala madrasah. Namun, ia sengaja memotret saat menyerahkannya dan mengunggahnya dengan caption agar dipuji teman-teman sekelasnya di grup WhatsApp.",
+                question: "Bagaimana hukum dan sikap yang tepat terhadap tindakan Ahmad?",
+                options: [
+                    { text: "Bagus agar orang lain termotivasi ikut beramal (Sembunyikan niat pamer).", score: 0, feedback: "Kurang tepat! Motivasi baik tidak membenarkan pamer (riya') yang dapat menghapus pahala ikhlas." },
+                    { text: "Tindakan tersebut termasuk Riya', sebaiknya amal kebaikan disembunyikan agar tetap ikhlas karena Allah SWT.", score: 100, feedback: "Tepat sekali! Riya' merusak pahala amal. Ikhlas adalah kunci diterimanya amal saleh." },
+                    { text: "Tidak apa-apa karena sudah membantu sesama warga madrasah.", score: 0, feedback: "Kurang tepat. Niat karena manusia mengurangi nilai ibadah di sisi Allah SWT." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Kasus 2: Shalat Berjamaah Saat Dilihat Guru",
+                situation: "Faisal biasanya tergesa-gesa saat shalat di rumah. Namun, ketika shalat Dzuhur berjamaah di madrasah dan diawasi oleh guru, Faisal memperlama sujud dan memperindah bacaannya agar mendapat pujian nilai akhlak.",
+                question: "Analisislah perilaku Faisal berdasarkan konsep Riya'!",
+                options: [
+                    { text: "Itu adalah Riya' Dzahir karena sengaja memperbagus ibadah saat dilihat orang lain.", score: 100, feedback: "Sempurna! Riya' Dzahir tampak jelas dari perubahan perilaku ibadah saat disaksikan manusia." },
+                    { text: "Perilaku terpuji yang harus dicontoh seluruh siswa madrasah.", score: 0, feedback: "Salah. Memperbagus ibadah khusus karena manusia adalah bentuk riya'." },
+                    { text: "Termasuk perbuatan yang tidak berpengaruh pada pahala shalat.", score: 0, feedback: "Kurang tepat. Riya' dapat membatalkan pahala ibadah tersebut." }
+                ]
+            }
+        ];
+
+        let selectedCaseIndex = 0;
+
+        function loadCases() {
+            const listContainer = document.getElementById('case-list');
+            listContainer.innerHTML = casesData.map((c, idx) => `
+                <button onclick="selectCase(${idx})" class="option-btn ${idx === selectedCaseIndex ? 'selected' : ''}" style="margin-bottom:0;">
+                    ${c.title}
+                </button>
+            `).join('');
+
+            renderCaseContent();
+        }
+
+        function selectCase(index) {
+            selectedCaseIndex = index;
+            loadCases();
+        }
+
+        function renderCaseContent() {
+            const c = casesData[selectedCaseIndex];
+            const area = document.getElementById('case-content-area');
+
+            let optionsHtml = c.options.map((opt, oIdx) => `
+                <button onclick="handleCaseAnswer(${oIdx})" id="opt-btn-${oIdx}" class="option-btn">
+                    <span class="option-badge">${String.fromCharCode(65 + oIdx)}</span>
+                    <span>${opt.text}</span>
+                </button>
+            `).join('');
+
+            area.innerHTML = `
+                <div>
+                    <span class="badge-gold" style="background: var(--tosca); color: #FFF;">Studi Kasus Kontekstual</span>
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--navy); margin-top: 6px;">${c.title}</h3>
+                    <p style="font-size: 13px; color: var(--text-dark); margin: 8px 0 16px 0; background: #FFF; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">${c.situation}</p>
+                </div>
+                <div>
+                    <h4 style="font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">${c.question}</h4>
+                    <div>${optionsHtml}</div>
+                </div>
+                <div id="case-feedback-box" style="display:none; margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px;"></div>
+            `;
+        }
+
+        function handleCaseAnswer(optIdx) {
+            const c = casesData[selectedCaseIndex];
+            const opt = c.options[optIdx];
+            const feedbackBox = document.getElementById('case-feedback-box');
+
+            feedbackBox.style.display = 'block';
+            if (opt.score === 100) {
+                feedbackBox.style.backgroundColor = 'var(--emerald-light)';
+                feedbackBox.style.border = '1px solid #A7F3D0';
+                feedbackBox.style.color = '#065F46';
+                feedbackBox.innerHTML = `<strong>✅ Analisis Tepat!</strong><p style="margin-top:4px;">${opt.feedback}</p>`;
+            } else {
+                feedbackBox.style.backgroundColor = 'var(--gold-light)';
+                feedbackBox.style.border = '1px solid #FDE68A';
+                feedbackBox.style.color = '#78350F';
+                feedbackBox.innerHTML = `<strong>💡 Umpan Balik Edukatif:</strong><p style="margin-top:4px;">${opt.feedback}</p>`;
+            }
+        }
+
+        // QUIZ DATA (Berfokus Khusus pada Sifat Riya')
+        const quizData = [
+            {
+                question: "1. Apa pengertian dari sifat riya' dalam beribadah?",
+                options: [
+                    "Melakukan ibadah dengan khusyuk hanya karena Allah SWT.",
+                    "Melakukan ibadah agar dilihat dan dipuji oleh orang lain.",
+                    "Menyembunyikan kebaikan agar tidak diketahui siapa pun.",
+                    "Beramal dengan niat membantu sesama manusia."
+                ],
+                correct: 1,
+                explanation: "Riya' secara bahasa berarti menampakkan. Secara istilah adalah melakukan amal ibadah dengan tujuan agar dilihat dan dipuji oleh orang lain."
+            },
+            {
+                question: "2. Di bawah ini yang merupakan bahaya utama dari sifat riya' terhadap nilai amal ibadah adalah...",
+                options: [
+                    "Menumbuhkan semangat gotong royong di desa.",
+                    "Merusak dan menghapuskan pahala amal kebaikan.",
+                    "Meningkatkan hasil pertanian di daerah agraris.",
+                    "Mempercepat selesainya tugas kelompok madrasah."
+                ],
+                correct: 1,
+                explanation: "Sifat riya' merusak kemurnian niat sehingga menghapus dan menghilangkan pahala amal di sisi Allah SWT."
+            },
+            {
+                question: "3. Melakukan ibadah dengan memperkeras bacaan atau memperindah gerakan shalat khusus saat dilihat guru/ustadz merupakan bentuk...",
+                options: [
+                    "Riya' Dzahir (Jelas)",
+                    "Riya' Khafi (Terselubung)",
+                    "Amal Shaleh",
+                    "Tawadhu'"
+                ],
+                correct: 0,
+                explanation: "Riya' Dzahir adalah riya' yang terlihat jelas melalui tindakan langsung beribadah agar dipuji manusia."
+            },
+            {
+                question: "4. Berdasarkan QS. Al-Baqarah ayat 264, perbuatan riya' dapat berdampak pada...",
+                options: [
+                    "Melipatgandakan pahala kebaikan.",
+                    "Menghapus dan merusak pahala amal sedekah/ibadah.",
+                    "Menjadikan seseorang dicintai seluruh warga madrasah.",
+                    "Mendapatkan keberkahan hidup."
+                ],
+                correct: 1,
+                explanation: "QS. Al-Baqarah: 264 menegaskan bahwa riya' dapat merusak dan menghapuskan pahala amal kebaikan."
+            },
+            {
+                question: "5. Manakah di bawah ini yang merupakan salah satu ciri utama orang yang memiliki sifat riya'?",
+                options: [
+                    "Tetap semangat beribadah meskipun tidak ada orang lain yang melihat.",
+                    "Bertambah semangat amalnya jika dipuji dan malas/berhenti jika dicela.",
+                    "Selalu mendoakan kebaikan untuk teman-temannya secara sembunyi-sembunyi.",
+                    "Menyembunyikan amalan sunnah dari pengetahuan orang lain."
+                ],
+                correct: 1,
+                explanation: "Orang yang riya' sangat bergantung pada respon manusia; semangat saat dipuji dan malas/enggan saat dicela."
+            },
+            {
+                question: "6. Maksud dari Riya' Khafi (terselubung) dalam kehidupan sehari-hari adalah...",
+                options: [
+                    "Pamer ibadah secara terang-terangan di depan umum.",
+                    "Mengharapkan pujian secara halus/tersirat atau merasa senang jika orang lain mengetahui amal rahasianya.",
+                    "Mengabaikan perintah shalat lima waktu.",
+                    "Menjauhi kegiatan kemasyarakatan di madrasah."
+                ],
+                correct: 1,
+                explanation: "Riya' Khafi adalah riya' yang halus/terselubung di dalam hati, seperti merasa bangga saat amal rahasianya secara tak sengaja terungkap."
+            },
+            {
+                question: "7. Mengapa mencintai pujian manusia secara berlebihan (hubbud dunya) menjadi penyebab timbulnya riya'?",
+                options: [
+                    "Kerap mendorong seseorang beramal demi pengakuan manusia daripada keridhaan Allah SWT.",
+                    "Membuat seseorang makin rajin beristighfar setiap hari.",
+                    "Menjadikan niat belajar semakin ikhlas.",
+                    "Memudahkan seseorang dalam menghafal Al-Qur'an."
+                ],
+                correct: 0,
+                explanation: "Cinta pujian dan pengakuan duniawi (hubbud dunya) menggeser niat lillahi ta'ala menjadi niat mencari ridho manusia."
+            },
+            {
+                question: "8. Salah satu cara paling efektif untuk menghindari sifat riya' adalah...",
+                options: [
+                    "Membiasakan berniat ikhlas Lillahi Ta'ala dan melatih diri beramal sunnah secara sembunyi-sembunyi.",
+                    "Hanya beribadah jika diminta oleh orang tua.",
+                    "Mengunggah seluruh kegiatan ibadah ke media sosial.",
+                    "Berhenti beribadah sama sekali agar tidak dilihat orang."
+                ],
+                correct: 0,
+                explanation: "Niat ikhlas karena Allah dan menyembunyikan amalan sunnah adalah benteng utama dari bahaya riya'."
+            },
+            {
+                question: "9. Hikmah utama yang diperoleh seorang murid yang menjauhi sifat riya' adalah...",
+                options: [
+                    "Mendapatkan julukan siswa paling populer di madrasah.",
+                    "Mendapatkan ketenangan hati, pahala yang utuh, dan keridhaan Allah SWT.",
+                    "Bebas dari ujian dan tugas madrasah.",
+                    "Dapat mengatur teman-teman kelompoknya."
+                ],
+                correct: 1,
+                explanation: "Keikhlasan membebaskan jiwa dari beban mencari pujian manusia dan mendatangkan keridhaan Allah SWT."
+            },
+            {
+                question: "10. Contoh penerapan akhlak ikhlas dan terhindar dari riya' saat membantu korban bencana di Gorontalo adalah...",
+                options: [
+                    "Menyumbang bantuan dengan tulus tanpa perlu dipotret atau diumumkan di media sosial.",
+                    "Menyumbang hanya jika nama dan jumlah sumbangannya dibacakan di depan umum.",
+                    "Meminta panitia menuliskan namanya di baliho besar.",
+                    "Membantu hanya jika disaksikan oleh guru pengampu."
+                ],
+                correct: 0,
+                explanation: "Menyembunyikan sedekah/bantuan tanpa perlu dipublikasikan untuk pujian adalah ciri keikhlasan sejati."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let isQuizSubmitted = false;
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            const q = quizData[currentQuizIndex];
+
+            document.getElementById('quiz-progress-text').innerText = `Soal ${currentQuizIndex + 1} dari ${quizData.length}`;
+
+            let optionsHtml = q.options.map((opt, oIdx) => {
+                let isSelected = userAnswers[currentQuizIndex] === oIdx;
+                let btnStyle = "";
+                
+                if (isQuizSubmitted) {
+                    if (oIdx === q.correct) {
+                        btnStyle = "background-color: var(--emerald-light); border-color: var(--emerald); color: #065F46; font-weight: bold;";
+                    } else if (isSelected && oIdx !== q.correct) {
+                        btnStyle = "background-color: var(--red-bg); border-color: var(--red-alert); color: #991B1B;";
+                    } else {
+                        btnStyle = "opacity: 0.6;";
+                    }
+                } else {
+                    btnStyle = isSelected ? "background-color: var(--navy); color: #FFF; border-color: var(--navy);" : "";
+                }
+
+                return `
+                    <button onclick="selectQuizOption(${oIdx})" ${isQuizSubmitted ? 'disabled' : ''} class="option-btn" style="${btnStyle}">
+                        <span class="option-badge" style="${isSelected && !isQuizSubmitted ? 'background: var(--gold); color: #000;' : ''}">${String.fromCharCode(65 + oIdx)}</span>
+                        <span>${opt}</span>
+                    </button>
+                `;
+            }).join('');
+
+            let explanationHtml = "";
+            if (isQuizSubmitted) {
+                let isCorrectUser = userAnswers[currentQuizIndex] === q.correct;
+                explanationHtml = `
+                    <div style="margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; background: ${isCorrectUser ? 'var(--emerald-light)' : 'var(--gold-light)'}; border: 1px solid ${isCorrectUser ? '#A7F3D0' : '#FDE68A'}; color: ${isCorrectUser ? '#065F46' : '#78350F'};">
+                        <strong>${isCorrectUser ? '✅ Jawaban Anda Benar!' : '❌ Jawaban Kurang Tepat!'}</strong>
+                        <p style="margin-top: 4px;"><strong>Pembahasan:</strong> ${q.explanation}</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="box-info box-info-slate">
+                    <span class="badge-gold" style="background: var(--emerald); color: #FFF;">Pertanyaan ${currentQuizIndex + 1}</span>
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--navy); margin: 10px 0 16px 0;">${q.question}</h3>
+                    <div>${optionsHtml}</div>
+                    ${explanationHtml}
+                </div>
+            `;
+
+            document.getElementById('prev-quiz-btn').style.display = currentQuizIndex === 0 ? 'none' : 'inline-flex';
+            if (currentQuizIndex === quizData.length - 1) {
+                document.getElementById('next-quiz-btn').style.display = 'none';
+                if (!isQuizSubmitted) document.getElementById('submit-quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-quiz-btn').style.display = 'inline-flex';
+                document.getElementById('submit-quiz-btn').style.display = 'none';
+            }
+        }
+
+        function selectQuizOption(optIdx) {
+            if (isQuizSubmitted) return;
+            userAnswers[currentQuizIndex] = optIdx;
+            loadQuiz();
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizIndex < quizData.length - 1) {
+                currentQuizIndex++;
+                loadQuiz();
+            }
+        }
+
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                loadQuiz();
+            }
+        }
+
+        function submitQuiz() {
+            isQuizSubmitted = true;
+            let correctCount = 0;
+            quizData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) correctCount++;
+            });
+
+            let finalScore = (correctCount / quizData.length) * 100;
+            document.getElementById('final-score-val').innerText = `${finalScore} / 100`;
+            document.getElementById('quiz-score-badge').style.display = 'block';
+            document.getElementById('submit-quiz-btn').style.display = 'none';
+            loadQuiz();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            selectMateri(0);
+            loadCases();
+            loadQuiz();
+        };
+    </script>
+</body>
+</html>
